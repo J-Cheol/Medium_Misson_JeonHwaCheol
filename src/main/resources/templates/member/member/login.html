@@ -1,14 +1,15 @@
-<form method="POST" onsubmit="submitLoginForm(this); return false;"
-      style="display: flex; flex-direction: column; gap:20px; max-width:500px;">
+<title>로그인</title>
 
-    <input type="text" name="user_id" placeholder="ID">
+<form method="POST" onsubmit="submitLoginForm(event);"
+          style="display: flex; flex-direction: column; gap:20px; max-width:500px;">
 
-    <input type="text" name="user_password" placeholder="PASSWORD">
+    <input type="text" name="user_id" placeholder="아이디">
 
-    <button type="submit" onclick="submitLoginFormAndRedirect('login')">
+    <input type="password" name="user_password" placeholder="비밀번호">
+
+    <button type="submit">
         로그인
     </button>
-
 </form>
 
 <form method="POST" onsubmit="submitLoginFormAndRedirect('join'); return false;"
@@ -20,10 +21,24 @@
 
 </form>
 
-
 <script>
-    function submitLoginForm(form)
+    async function checkCredentials(login, password)
     {
+
+        return new Promise((resolve) =>
+        {
+            setTimeout(() =>
+            {
+                const isCredentialsValid = (login === '사용자아이디' && password === '사용자비밀번호');
+                resolve(isCredentialsValid);
+            }, 1000);
+        });
+    }
+
+    async function submitLoginForm(event) {
+        event.preventDefault();
+
+        const form = event.target;
         const inpuUserId = form.user_id;
         const inputUserPassword = form.user_password;
 
@@ -33,23 +48,31 @@
         const login = inpuUserId.value;
         const password = inputUserPassword.value;
 
-        if (login.length == 0)
+
+        const isCredentialsValid = await checkCredentials(login, password);
+
+        if (login.length === 0)
         {
             alert("아이디를 입력해주세요.");
-            inputTitle.focus();
+            inpuUserId.focus();
             return;
         }
 
-        if (body.length == 0)
+        if (password.length === 0)
         {
             alert("비밀번호를 입력해주세요.");
-            inputBody.focus();
-
+            inputUserPassword.focus();
             return;
         }
+
+        if (!isCredentialsValid)
+        {
+            alert("아이디 또는 비밀번호가 맞지 않습니다.");
+            return;
+        }
+
         form.submit();
     }
-
     function submitLoginFormAndRedirect(destination)
     {
         var form = document.querySelector('form');
