@@ -1,0 +1,62 @@
+<form method="POST" onsubmit="submitLoginForm(this); return false;"
+      style="display: flex; flex-direction: column; gap:20px; max-width:500px;">
+
+    <input type="text" name="user_id" placeholder="ID">
+
+    <input type="text" name="user_password" placeholder="PASSWORD">
+
+    <button type="submit" onclick="submitLoginFormAndRedirect('login')">
+        로그인
+    </button>
+
+</form>
+
+<form method="POST" onsubmit="submitLoginFormAndRedirect('join'); return false;"
+      style="display: flex; flex-direction: column; gap:20px; max-width:500px;">
+
+    <button>
+        회원가입
+    </button>
+
+</form>
+
+
+<script>
+    function submitLoginForm(form)
+    {
+        const inpuUserId = form.user_id;
+        const inputUserPassword = form.user_password;
+
+        inpuUserId.value = inpuUserId.value.trim();
+        inputUserPassword.value = inputUserPassword.value.trim();
+
+        const login = inpuUserId.value;
+        const password = inputUserPassword.value;
+
+        if (login.length == 0)
+        {
+            alert("아이디를 입력해주세요.");
+            inputTitle.focus();
+            return;
+        }
+
+        if (body.length == 0)
+        {
+            alert("비밀번호를 입력해주세요.");
+            inputBody.focus();
+
+            return;
+        }
+        form.submit();
+    }
+
+    function submitLoginFormAndRedirect(destination)
+    {
+        var form = document.querySelector('form');
+        var actionUrl = (destination === 'login') ? '/member/login' : '/member/join';
+
+        form.action = actionUrl;
+
+        form.submit();
+    }
+</script>
