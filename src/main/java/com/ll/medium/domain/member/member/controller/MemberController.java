@@ -3,6 +3,7 @@ package com.ll.medium.domain.member.member.controller;
 import com.ll.medium.domain.member.member.entity.Member;
 import com.ll.medium.domain.member.member.service.MemberService;
 import com.ll.medium.global.rq.Rq.Rq;
+import com.ll.medium.global.rsData.RsData.RsData;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -33,14 +34,8 @@ public class MemberController
     String showJoin(@Valid JoinForm joinForm)
     {
 
-        Member member = memberService.join(joinForm.getUsername(), joinForm.getPassword());
-        if (member == null)
-        {
-            return rq.redirect("/member/join", "이미 존재하는 회원입니다.");
-        }
-        return rq.redirect(
-                "/",
-                "%s님 환영합니다. 회원가입이 완료되었습니다. 로그인 후 이용해주세요.".formatted(member.getUsername()));
+        RsData<Member> joinRs = memberService.join(joinForm.getUsername(), joinForm.getPassword());
+        return rq.redirectOrBack(joinRs, "/member/login");
     }
 
     @GetMapping("/join")

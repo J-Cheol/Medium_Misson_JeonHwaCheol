@@ -25,11 +25,15 @@ public class Member
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+
     @CreatedDate
     private LocalDateTime createDate;
+
     @LastModifiedDate
     private LocalDateTime modifyDate;
+
     private String username;
+
     private String password;
 
     public Member(String username, String password)
