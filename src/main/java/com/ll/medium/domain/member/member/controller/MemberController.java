@@ -1,12 +1,13 @@
 package com.ll.medium.domain.member.member.controller;
 
 import com.ll.medium.domain.member.member.repository.MemberRepository;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -15,22 +16,30 @@ public class MemberController
 {
     private final MemberRepository memberRepository;
 
-    @PostMapping("/join")
-    String showJoin()
+    @Getter
+    @Setter
+    public static class JoinForm
     {
-        return "redirect:/member/member/join";
+        private String username;
+        private String password;
+    }
+
+
+    @PostMapping("/join")
+    String showJoin(JoinForm joinForm)
+    {
+        return "redirect:/";
     }
 
     @GetMapping("/join")
-    String showJoin2(@RequestParam("username") String username,
-                     @RequestParam("password") String password)
+    String showJoin2()
     {
-        return "member/member/join";
+        return "domain/member/member/join";
     }
 
     @GetMapping("/login")
     String showLogin()
     {
-        return "member/member/login";
+        return "domain/member/member/login";
     }
 }
