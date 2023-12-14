@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +31,7 @@ public class MemberController
     }
 
 
+    @PreAuthorize("isAnonymous()")
     @PostMapping("/join")
     public String showJoin(@Valid JoinForm joinForm)
     {
@@ -38,6 +40,7 @@ public class MemberController
         return rq.redirectOrBack(joinRs, "/member/login");
     }
 
+    @PreAuthorize("isAnonymous()")
     @GetMapping("/join")
     public String showJoin2()
     {
