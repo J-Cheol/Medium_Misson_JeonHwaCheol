@@ -31,7 +31,7 @@ public class MemberController
 
 
     @PostMapping("/join")
-    String showJoin(@Valid JoinForm joinForm)
+    public String showJoin(@Valid JoinForm joinForm)
     {
 
         RsData<Member> joinRs = memberService.join(joinForm.getUsername(), joinForm.getPassword());
@@ -39,13 +39,13 @@ public class MemberController
     }
 
     @GetMapping("/join")
-    String showJoin2()
+    public String showJoin2()
     {
         return "domain/member/member/join";
     }
 
     @GetMapping("/login")
-    String showLogin()
+    public String showLogin()
     {
         return "domain/member/member/login";
     }
