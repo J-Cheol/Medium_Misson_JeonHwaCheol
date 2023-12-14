@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -23,7 +25,16 @@ public class PostService
                 .body(body)
                 .isPublished(isPublished)
                 .build();
-
         postRepository.save(post);
+    }
+
+    public Object findTop30ByIsPublishedOrderByIdDesc(boolean isPublished)
+    {
+        return postRepository.findTop30ByIsPublishedOrderByIdDesc(isPublished);
+    }
+
+    public Optional<Post> findById(long id)
+    {
+        return postRepository.findById(id);
     }
 }
