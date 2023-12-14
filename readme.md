@@ -22,7 +22,7 @@
 - [ ] GET /post/1/modify : 1번 글 수정 폼
 - [ ] PUT /post/1/modify : 1번 글 수정 폼 처리
 - [ ] DELETE /post/1/delete : 1번 글 삭제
-- 
+
 ## 블로그 작업
 
 - [ ] GET /b/user1 : 회원 user1 의 전체 글 리스트
