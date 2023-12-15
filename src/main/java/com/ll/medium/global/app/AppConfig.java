@@ -8,7 +8,8 @@ import org.springframework.core.io.ClassPathResource;
 import java.io.IOException;
 
 @Configuration
-public class AppConfig {
+public class AppConfig
+{
     private static String resourcesStaticDirPath;
 
     @Getter
@@ -24,31 +25,39 @@ public class AppConfig {
     public static String siteBaseUrl;
 
     @Value("${custom.tempDirPath}")
-    public void setTempDirPath(String tempDirPath) {
+    public void setTempDirPath(String tempDirPath)
+    {
         AppConfig.tempDirPath = tempDirPath;
     }
 
     @Value("${custom.genFile.dirPath}")
-    public void setGenFileDirPath(String genFileDirPath) {
+    public void setGenFileDirPath(String genFileDirPath)
+    {
         AppConfig.genFileDirPath = genFileDirPath;
     }
 
     @Value("${custom.site.name}")
-    public void setSiteName(String siteName) {
+    public void setSiteName(String siteName)
+    {
         AppConfig.siteName = siteName;
     }
 
     @Value("${custom.site.baseUrl}")
-    public void setSiteBaseUrl(String siteBaseUrl) {
+    public void setSiteBaseUrl(String siteBaseUrl)
+    {
         AppConfig.siteBaseUrl = siteBaseUrl;
     }
 
-    public static String getResourcesStaticDirPath() {
-        if (resourcesStaticDirPath == null) {
+    public static String getResourcesStaticDirPath()
+    {
+        if (resourcesStaticDirPath == null)
+        {
             ClassPathResource resource = new ClassPathResource("static/");
-            try {
+            try
+            {
                 resourcesStaticDirPath = resource.getFile().getAbsolutePath();
-            } catch (IOException e) {
+            } catch (IOException e)
+            {
                 throw new RuntimeException(e);
             }
         }
